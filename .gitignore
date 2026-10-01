@@ -4,6 +4,17 @@ __pycache__/
 *.pyc
 .DS_Store
 .langgraph_api/
-workspace/
+# Workspace project: keep prompts, memory, tests and source code under version
+# control, but never commit secrets, local papers, generated reports, or caches.
+workspace/.env
+workspace/.venv/
+workspace/.venv*/
+workspace/__pycache__/
+workspace/**/*.py[cod]
+workspace/work/
+workspace/outputs/*.md
+!workspace/outputs/README.md
+workspace/references/*.pdf
+workspace/email_triggers.json
 mcp_servers.json
 .playwright-mcp

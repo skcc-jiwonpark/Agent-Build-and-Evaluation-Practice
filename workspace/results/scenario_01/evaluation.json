@@ -1,0 +1,25 @@
+{
+  "case_id": "scenario_01_methodology_boundary",
+  "rule_pass": true,
+  "missing_sections": [],
+  "missing_required_terms": [],
+  "missing_required_any_groups": [],
+  "forbidden_claim_hits": [],
+  "metrics": {
+    "section_coverage": 1.0,
+    "source_locator_mentions": 16,
+    "locator_threshold_pass": true,
+    "evidence_status_markers": 2
+  },
+  "llm_judge": {
+    "status": "completed",
+    "result": {
+      "score": 5,
+      "verdict": "pass",
+      "rationale": "두 예측 방법론 논문을 실험 합성 논문이 아님으로 정확히 분류하고, 모든 전구체 필드를 'not reported'로 처리하여 예측값을 레시피로 변환하지 않았다. 모든 주장에 페이지/절 단위 locator를 부여했고, 사실(섹션 4)·불확실성(섹션 5: SI 미제공, 텍스트 절단, 참고문헌 [51] 미확보, 자체 추정임을 명시)·발견 단서(섹션 6 체크리스트)를 명확히 분리했다. 체크리스트는 실험 지시가 아닌 문헌 추적 지침(목표 물질 특정, S2의 34개 물질 원문헌 역추적, SI 확보 등)으로 구성되어 연구자가 다음에 무엇을 확인해야 할지 알 수 있으며, 예측 점수 오용 방지와 면책도 명시되었다.",
+      "source_grounding": 5,
+      "uncertainty_separation": 5,
+      "researcher_usefulness": 5
+    }
+  }
+}

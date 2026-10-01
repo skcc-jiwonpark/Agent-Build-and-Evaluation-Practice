@@ -48,7 +48,7 @@ HARNESS_ENTRY = "langchain-deepagents.py"
 
 # variant 복사 시 제외할 무겁거나 런타임/스크래치 성격의 경로.
 COPY_IGNORE_DIRS = {
-    ".git", ".venv", "venv", "workspace", "__pycache__", ".langgraph_api",
+    ".git", ".venv", "venv", "__pycache__", ".langgraph_api",
     ".meta", ".mypy_cache", ".ruff_cache", ".pytest_cache", "node_modules",
     ".idea", ".vscode",
 }
@@ -287,6 +287,31 @@ def _snapshot(ws: Path) -> dict[str, str]:
     return snap
 
 
+def _stage_workspace_fixture(variant_root: Path, isolated_workspace: Path) -> None:
+    """Copy the project fixture into a meta-run workspace without secrets/caches.
+
+    The course scaffold normally starts an empty workspace. The precursor agent
+    needs its local question, read-only papers, harness, and evaluation files to
+    make baseline/variant comparisons meaningful, so they are staged only inside
+    the already-isolated workspace.
+    """
+    fixture = variant_root / "workspace"
+    if not fixture.is_dir():
+        return
+    ignored = shutil.ignore_patterns(
+        ".env", ".venv", ".venv*", "__pycache__", "*.pyc", "work",
+        "observation/runs", "outputs/precursor_evidence_report_*.md",
+    )
+    for item in fixture.iterdir():
+        if item.name in {".env", ".venv", "work"} or item.name == "__pycache__":
+            continue
+        target = isolated_workspace / item.name
+        if item.is_dir():
+            shutil.copytree(item, target, ignore=ignored, dirs_exist_ok=True)
+        else:
+            shutil.copy2(item, target)
+
+
 def cmd_headless(args: argparse.Namespace) -> int:
     """[내부] variant 하네스를 import 해 질의를 헤드리스로 실행하고 결과를 out-dir 에 덤프."""
     harness_file = Path(args.harness_file).resolve()
@@ -302,6 +327,7 @@ def cmd_headless(args: argparse.Namespace) -> int:
     if ws.exists():
         shutil.rmtree(ws, ignore_errors=True)
     ws.mkdir(parents=True, exist_ok=True)
+    _stage_workspace_fixture(variant_root, ws)
     os.environ["WORKSPACE_DIR"] = str(ws)
 
     # variant 소스를 우선 import 경로로. cwd 는 이미 variant_root(부모가 설정).

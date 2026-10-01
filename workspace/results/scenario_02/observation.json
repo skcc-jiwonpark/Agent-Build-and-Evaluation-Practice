@@ -1,0 +1,50 @@
+{
+  "status": "completed",
+  "label": "scenario-02",
+  "plan": {
+    "question_file": "/Users/a11425/Desktop/pjt/study/Agent-Build-and-Evaluation-Practice/workspace/evals/scenarios/scenario_02_evidence_gap_followup.md",
+    "stages": [
+      {
+        "name": "prepare_local_sources",
+        "status": "done"
+      },
+      {
+        "name": "build_context",
+        "status": "done"
+      },
+      {
+        "name": "generate_evidence_report",
+        "status": "done"
+      },
+      {
+        "name": "validate_or_repair_once",
+        "status": "done"
+      },
+      {
+        "name": "save_report_and_observation",
+        "status": "done"
+      }
+    ],
+    "web_search_enabled": false,
+    "retry_policy": "One repair is allowed only for a missing required section; identical retries are forbidden."
+  },
+  "source_preparation": {
+    "pdf_count": 2
+  },
+  "context": {
+    "local_source_count": 2,
+    "max_chars_per_source": 8000
+  },
+  "tool_policy": {
+    "tavily_enabled": false,
+    "repair_attempted": false,
+    "max_repairs": 1
+  },
+  "validation": {
+    "accepted": true,
+    "missing_sections": [],
+    "contains_evidence_status": true
+  },
+  "output_report": "/Users/a11425/Desktop/pjt/study/Agent-Build-and-Evaluation-Practice/workspace/results/scenario_02/report.md",
+  "elapsed_seconds": 79.94
+}

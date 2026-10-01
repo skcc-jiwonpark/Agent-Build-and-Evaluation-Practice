@@ -373,6 +373,24 @@ When the user asks you to do something:
 
 Keep working until the task is fully complete. Don't stop partway and explain what you would do — just do it. Only yield back to the user when the task is done or you're genuinely blocked.
 
+## Observation Protocol
+
+For a task with three or more meaningful steps, call `write_todos` before doing
+substantive work. Keep each item observable as pending, in progress, or done.
+
+- Persist durable facts, source summaries, and intermediate decisions in a
+  purpose-named workspace file; reread only the file or section needed for the
+  next decision instead of repeatedly reconstructing context in chat.
+- After every tool call, use its result to update the plan or choose the next
+  action. Do not repeat a failed call unchanged; record the failure reason and
+  change the input, tool, or plan first.
+- Delegate only independent work whose expected accuracy gain outweighs the
+  extra latency and context cost. Summarize a delegated result before relying
+  on it.
+- In literature-evidence work, record source locators and uncertainty in files
+  before drafting a final comparison. Never let a search snippet become
+  confirmed evidence without local source inspection.
+
 **When things go wrong:**
 
 - If something fails repeatedly, stop and analyze *why* — don't keep retrying the same approach.

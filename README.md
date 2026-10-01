@@ -64,3 +64,16 @@
 ## 필수 설정
 
 `.env`의 `OPENAI_API_KEY`는 필수입니다. Tavily, Slack, Telegram, 이메일 연동은 해당 기능을 사용할 때만 각 키와 설정을 추가하면 됩니다. 자세한 환경변수 목록은 [`.env.example`](.env.example)을 참고하세요.
+
+## Precursor Evidence Agent
+
+이 저장소의 `workspace/`는 무기결정 합성 관련 문헌에서 전구체 후보와 조건을
+출처와 함께 비교하는 에이전트 작업 공간으로 구성되어 있습니다.
+
+- 장기 메모리와 재사용 스킬: `workspace_seed/AGENTS.md`, `workspace_seed/skills/`
+- 연구 질문·문헌·하네스·기획서: `workspace/`
+- 독립 실행: `uv run python workspace/run_agent.py`
+- 외부 문헌 탐색 포함: `uv run python workspace/run_agent.py --search`
+
+먼저 `workspace_seed/AGENTS.md`, `workspace/memory/PROJECT_CONTEXT.md`,
+`workspace/HARNESS.md`를 읽으세요. 논문 PDF와 생성 보고서는 Git에서 제외됩니다.

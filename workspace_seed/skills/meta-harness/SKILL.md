@@ -34,6 +34,16 @@ python skills/meta-harness/metaharness.py <subcommand> [옵션]
 
 ## 절차
 
+### Precursor Evidence Agent 적용
+
+이 저장소에서는 `workspace/`가 전구체 문헌 분석의 질문·참고문헌·하네스·평가 세트를
+담는다. meta-run은 이 파일들을 **격리 워크스페이스에만** 복사해 baseline과 variant가
+동일한 문헌 입력을 보게 한다. 원본 `workspace/`와 원본 PDF는 수정하지 않는다.
+
+대표 질의는 `workspace/evals/*.md`에서 고르고, variant 실행 뒤 생성된 보고서는
+`workspace/evals/evaluate_report.py`의 규칙/지표로 먼저 평가한다. LLM-as-a-Judge는
+비용과 문헌 전송 동의를 얻은 경우에만 추가한다.
+
 ### 0) 사전 점검 (필수)
 
 ```
